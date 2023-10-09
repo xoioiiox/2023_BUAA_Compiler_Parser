@@ -77,8 +77,11 @@ public class StmtParser {
                 stmt = new StmtExp(exp);
             }
         }
-        else {
-            stmt = null;
+        else { // other exp : number, (exp)
+            ExpParser expParser = new ExpParser(iterator);
+            Exp exp = expParser.parseExp();
+            iterator.read(); // ;
+            stmt = new StmtExp(exp);
         }
         System.out.println("<Stmt>");
         return stmt;
